@@ -1,21 +1,25 @@
-# Úkolem je vytvořit známou skautskou hru „Kdo? S kým? Co dělali?“. Hra se
-# hráče zeptá postupně na různé otázky, například „Kdo?“, „S kým?“, „Co dělali?“,
-# „Kde?“, „Kdy?“, a nakonec „Proč?“, s tím, že mu umožní na jednu otázku odpovědět
-# vícekrát a všechny odpovědi si uloží. Na závěr pak hra z každé sady odpovědí vybere
-# náhodně jednu odpověď a z takto vybraných odpovědí složí větu, kterou vypíše
-# uživateli. Seznam otázek by mělo být možné změnit v kódu na jednom místě bez zásahu
-# do logiky programu.
 import random
 
+print('''Ahoj, vítej u této suprové hry. Počítač ti vždy položí otázku a ty
+budeš odpovídat, dokud tě to nepřestane bavit. Napíšeš-li "konec", hra skočí
+na další otázku, dokud nedojdeš k té poslední.''')
 
-kdo = input('Kdo? ')
-sKym = input('S kým? ')
-co = input('Co dělali? ')
-kde = input('Kde? ')
-kdy = input('Kdy? ')
-proc = input('Proč? ')
-
-def ptej_se(otazka)
+def ptej_se(otazka):
     '''Část hry, která uživateli pokládá otázky a ukládá je.
     '''
-    
+    odpovedi = []
+    while True:
+        odpoved = input(otazka)
+        if odpoved != 'konec':
+            odpovedi.append(odpoved)
+        else:
+            break
+    return odpovedi
+
+otazky = ['Kdo? ', 'S kým? ', 'Co dělali? ', 'Kde? ', 'Kdy? ', 'Proč? ']
+slovnik = {}
+for prvek in otazky:
+    slovnik[prvek]=ptej_se(prvek)
+
+for odpoved in slovnik.values():
+    print(random.choice(odpoved), end=' ')
